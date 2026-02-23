@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Academia Joche</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Pantalla de Login -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-box">
+            <h1>🥋 Academia Joche</h1>
+            <h2>Panel de Administración</h2>
+            
+            <!-- Formulario de Login -->
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" placeholder="tu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="password" placeholder="Tu contraseña" required>
+                        <button type="button" class="toggle-password" data-target="password">
+                            <span class="eye-icon">👁️</span>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Entrar</button>
+                <p id="loginError" class="error-message"></p>
+            </form>
+            
+            <div class="login-links">
+                <button type="button" id="showRecoverBtn" class="link-btn">¿Olvidaste tu contraseña?</button>
+            </div>
+        </div>
+
+        <!-- Formulario de Recuperar Contraseña -->
+        <div id="recoverBox" class="login-box" style="display: none;">
+            <h1>🔑 Recuperar Contraseña</h1>
+            <p class="recover-text">Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña.</p>
+            
+            <form id="recoverForm">
+                <div class="form-group">
+                    <label for="recoverEmail">Correo electrónico</label>
+                    <input type="email" id="recoverEmail" placeholder="tu@email.com" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Enviar enlace</button>
+                <p id="recoverMessage" class="message"></p>
+            </form>
+            
+            <div class="login-links">
+                <button type="button" id="showLoginBtn" class="link-btn">← Volver al login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel Principal -->
+    <div id="adminPanel" class="admin-panel" style="display: none;">
+        <header class="admin-header">
+            <h1>🥋 Panel de Administración</h1>
+            <div class="header-actions">
+                <span id="userEmail" class="user-email"></span>
+                <a href="index.html" target="_blank" class="btn btn-secondary">👁️ Ver sitio</a>
+                <button id="showPasswordBtn" class="btn btn-outline">🔑 Cambiar contraseña</button>
+                <button id="logoutBtn" class="btn btn-outline">Cerrar sesión</button>
+            </div>
+        </header>
+
+        <main class="admin-main">
+            <!-- Modal Cambiar Contraseña -->
+            <div id="passwordModal" class="password-modal" style="display: none;">
+                <div class="password-modal-content">
+                    <h2>🔑 Cambiar Contraseña</h2>
+                    <form id="passwordForm">
+                        <div class="form-group">
+                            <label for="currentPassword">Contraseña actual</label>
+                            <div class="password-input-wrapper">
+                                <input type="password" id="currentPassword" required>
+                                <button type="button" class="toggle-password" data-target="currentPassword">
+                                    <span class="eye-icon">👁️</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">Nueva contraseña</label>
+                            <div class="password-input-wrapper">
+                                <input type="password" id="newPassword" minlength="6" required>
+                                <button type="button" class="toggle-password" data-target="newPassword">
+                                    <span class="eye-icon">👁️</span>
+                                </button>
+                            </div>
+                            <small>Mínimo 6 caracteres</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmar nueva contraseña</label>
+                            <div class="password-input-wrapper">
+                                <input type="password" id="confirmPassword" minlength="6" required>
+                                <button type="button" class="toggle-password" data-target="confirmPassword">
+                                    <span class="eye-icon">👁️</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">💾 Guardar</button>
+                            <button type="button" id="cancelPasswordBtn" class="btn btn-secondary">Cancelar</button>
+                        </div>
+                        <p id="passwordMessage" class="message"></p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Formulario de Noticias -->
+            <section class="admin-section">
+                <div class="section-header">
+                    <h2 id="formTitle">➕ Agregar Nueva Noticia</h2>
+                </div>
+                
+                <form id="noticiaForm" class="noticia-form">
+                    <div class="form-group">
+                        <label for="titulo">📝 Título *</label>
+                        <input type="text" id="titulo" placeholder="Ej: Campeonato Regional 2026" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fecha">📅 Fecha *</label>
+                            <input type="date" id="fecha" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hora">⏰ Hora *</label>
+                            <input type="time" id="hora" required>
+                        </div>
+                    </div>
+
+                    <!-- Opción de programar -->
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="programar">
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-text">📆 Programar publicación</span>
+                        </label>
+                        <small id="programarInfo" style="display: none;">
+                            La noticia se publicará automáticamente en la fecha y hora seleccionada.
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="resumen">📋 Resumen corto *</label>
+                        <textarea id="resumen" rows="2" placeholder="Un resumen breve..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contenido">📄 Contenido completo *</label>
+                        <textarea id="contenido" rows="5" placeholder="El contenido completo..." required></textarea>
+                    </div>
+
+                    <!-- Upload de imagen -->
+                    <div class="form-group">
+                        <label>🖼️ Imagen (opcional)</label>
+                        <div class="image-upload">
+                            <input type="file" id="imagen" accept="image/*" class="image-input">
+                            <div class="image-preview" id="imagePreview">
+                                <span class="preview-placeholder">📷 Haz clic o arrastra una imagen aquí</span>
+                            </div>
+                            <button type="button" id="removeImage" class="btn btn-small btn-danger" style="display: none;">
+                                🗑️ Quitar imagen
+                            </button>
+                        </div>
+                        <small>Formatos: JPG, PNG. Máximo 5MB</small>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-large">💾 Guardar Noticia</button>
+                        <button type="button" id="cancelBtn" class="btn btn-secondary" style="display: none;">❌ Cancelar</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Lista de noticias -->
+            <section class="admin-section">
+                <div class="section-header">
+                    <h2>📰 Noticias</h2>
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-filter="todas">Todas</button>
+                        <button class="filter-tab" data-filter="publicadas">Publicadas</button>
+                        <button class="filter-tab" data-filter="programadas">Programadas</button>
+                    </div>
+                </div>
+                <span id="noticiasCount" class="badge badge-count">0</span>
+                <div id="noticiasLista" class="noticias-lista"></div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="js/admin-firebase.js"></script>
+</body>
+</html>

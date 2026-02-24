@@ -9,6 +9,8 @@
     --color-dark: #212529;
     --color-gray: #6c757d;
     --color-white: #ffffff;
+    --color-whatsapp: #25D366;
+    --color-whatsapp-dark: #1da851;
     
     --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --border-radius: 8px;
@@ -262,7 +264,7 @@ ul { list-style: none; }
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f0f0f0;    /* Fondo gris claro si hay espacio */
+    background: #f0f0f0;
     overflow: hidden;
 }
 
@@ -271,7 +273,7 @@ ul { list-style: none; }
     max-height: 100%;
     width: auto;
     height: auto;
-    object-fit: contain;    /* 👈 Muestra toda la imagen sin recortar */
+    object-fit: contain;
     transition: transform var(--transition);
 }
 
@@ -371,6 +373,57 @@ ul { list-style: none; }
 .form__group textarea:focus {
     outline: none;
     border-color: var(--color-primary);
+}
+
+/* ================================
+   WHATSAPP BUTTON
+   ================================ */
+.whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--color-whatsapp);
+    color: var(--color-white);
+    padding: 0.875rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    margin-top: 0.5rem;
+}
+
+.whatsapp-btn:hover {
+    background: var(--color-whatsapp-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    color: var(--color-white);
+}
+
+.whatsapp-btn:active {
+    transform: translateY(-1px);
+}
+
+.whatsapp-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+/* Animación sutil de pulso */
+@keyframes whatsapp-pulse {
+    0% { box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); }
+    50% { box-shadow: 0 4px 25px rgba(37, 211, 102, 0.5); }
+    100% { box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); }
+}
+
+.whatsapp-btn {
+    animation: whatsapp-pulse 2s ease-in-out infinite;
+}
+
+.whatsapp-btn:hover {
+    animation: none;
 }
 
 /* ================================

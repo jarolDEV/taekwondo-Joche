@@ -1,132 +1,143 @@
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Academia Joche - Clases de artes marciales">
-        <title>Academia Joche | Artes Marciales</title>
-        <link rel="stylesheet" href="css/styles.css">
-    </head>
-    <body>
-        <!-- Header / Navegación -->
-        <header class="header">
-            <nav class="nav container">
-                <a href="#" class="nav__logo">🥋 Academia Joche</a>
-                <button class="nav__toggle" aria-label="Abrir menú">☰</button>
-                <ul class="nav__menu">
-                    <li><a href="#inicio" class="nav__link">Inicio</a></li>
-                    <li><a href="#nosotros" class="nav__link">Nosotros</a></li>
-                    <li><a href="#noticias" class="nav__link">Noticias</a></li>
-                    <li><a href="#contacto" class="nav__link">Contacto</a></li>
-                </ul>
-            </nav>
-        </header>
-    
-        <main>
-            <!-- Hero Section -->
-            <section id="inicio" class="hero">
-                <div class="container hero__content">
-                    <h1 class="hero__title">Descubre tu potencial interior</h1>
-                    <p class="hero__subtitle">Formando campeones en cuerpo y espíritu</p>
-                    <a href="#contacto" class="btn btn--primary">¡Inscríbete ahora!</a>
-                </div>
-            </section>
-    
-            <!-- Sobre Nosotros -->
-            <section id="nosotros" class="section about">
-                <div class="container">
-                    <h2 class="section__title">Sobre Nuestra Academia</h2>
-                    <div class="about__content">
-                        <p>En Academia Joche nos dedicamos a la enseñanza de artes marciales con un enfoque en el desarrollo integral de nuestros estudiantes.</p>
-                        <ul class="about__features">
-                            <li>✓ Instructores certificados</li>
-                            <li>✓ Clases para todas las edades</li>
-                            <li>✓ Instalaciones de primer nivel</li>
-                            <li>✓ Metodología probada</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-    
-            <!-- Noticias -->
-            <section id="noticias" class="section news">
-                <div class="container">
-                    <h2 class="section__title">Últimas Noticias</h2>
-                    <div class="news__grid" id="noticias-container">
-                        <!-- Las noticias se cargan automáticamente desde Firebase -->
-                    </div>
-                </div>
-            </section>
-    
-            <!-- Contacto -->
-            <section id="contacto" class="section contact">
-                <div class="container">
-                    <h2 class="section__title">Contáctanos</h2>
-                    <div class="contact__grid">
-                        <div class="contact__info">
-                            <div class="contact__item">
-                                <span class="contact__icon">📍</span>
-                                <div>
-                                    <h4>Dirección</h4>
-                                    <p>Tu dirección aquí</p>
-                                </div>
-                            </div>
-                            <div class="contact__item">
-                                <span class="contact__icon">📞</span>
-                                <div>
-                                    <h4>Teléfono</h4>
-                                    <p><a href="tel:+1234567890">+1 234 567 890</a></p>
-                                </div>
-                            </div>
-                            <div class="contact__item">
-                                <span class="contact__icon">✉️</span>
-                                <div>
-                                    <h4>Email</h4>
-                                    <p><a href="mailto:info@academiajoche.com">info@academiajoche.com</a></p>
-                                </div>
-                            </div>
-                            <div class="contact__item">
-                                <span class="contact__icon">🕐</span>
-                                <div>
-                                    <h4>Horarios</h4>
-                                    <p>Lun - Vie: 9:00 - 21:00<br>Sáb: 9:00 - 14:00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <form class="contact__form" id="contactForm">
-                            <div class="form__group">
-                                <label for="nombre">Nombre</label>
-                                <input type="text" id="nombre" name="nombre" required>
-                            </div>
-                            <div class="form__group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div class="form__group">
-                                <label for="mensaje">Mensaje</label>
-                                <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn--primary btn--full">Enviar mensaje</button>
-                        </form>
-                    </div>
-                </div>
-            </section>
-        </main>
-    
-        <!-- Footer -->
-        <footer class="footer">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Academia Joche - Clases de artes marciales">
+    <title>Academia Joche | Artes Marciales</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header / Navegación -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">🥋 Academia Joche</a>
+            <button class="nav__toggle" aria-label="Abrir menú">☰</button>
+            <ul class="nav__menu">
+                <li><a href="#inicio" class="nav__link">Inicio</a></li>
+                <li><a href="#nosotros" class="nav__link">Nosotros</a></li>
+                <li><a href="#noticias" class="nav__link">Noticias</a></li>
+                <li><a href="#contacto" class="nav__link">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="inicio" class="hero">
+            <div class="container hero__content">
+                <h1 class="hero__title">Descubre tu potencial interior</h1>
+                <p class="hero__subtitle">Formando campeones en cuerpo y espíritu</p>
+                <a href="#contacto" class="btn btn--primary">¡Inscríbete ahora!</a>
+            </div>
+        </section>
+
+        <!-- Sobre Nosotros -->
+        <section id="nosotros" class="section about">
             <div class="container">
-                <div class="footer__content">
-                    <p>&copy; 2026 Academia Joche. Todos los derechos reservados.</p>
-                    <div class="footer__social">
-                        <a href="#" aria-label="Facebook">📘</a>
-                        <a href="#" aria-label="Instagram">📷</a>
-                    </div>
+                <h2 class="section__title">Sobre Nuestra Academia</h2>
+                <div class="about__content">
+                    <p>En Academia Joche nos dedicamos a la enseñanza de artes marciales con un enfoque en el desarrollo integral de nuestros estudiantes.</p>
+                    <ul class="about__features">
+                        <li>✓ Instructores certificados</li>
+                        <li>✓ Clases para todas las edades</li>
+                        <li>✓ Instalaciones de primer nivel</li>
+                        <li>✓ Metodología probada</li>
+                    </ul>
                 </div>
             </div>
-        </footer>
-    
-        <script type="module" src="js/noticias-firebase.js"></script>
-        <script src="js/main.js"></script>
-    </body>
-    </html>
+        </section>
+
+        <!-- Noticias -->
+        <section id="noticias" class="section news">
+            <div class="container">
+                <h2 class="section__title">Últimas Noticias</h2>
+                <div class="news__grid" id="noticias-container">
+                    <!-- Las noticias se cargan automáticamente desde Firebase -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto -->
+        <section id="contacto" class="section contact">
+            <div class="container">
+                <h2 class="section__title">Contáctanos</h2>
+                <div class="contact__grid">
+                    <div class="contact__info">
+                        <div class="contact__item">
+                            <span class="contact__icon">📍</span>
+                            <div>
+                                <h4>Dirección</h4>
+                                <p>Tu dirección aquí</p>
+                            </div>
+                        </div>
+                        <div class="contact__item">
+                            <span class="contact__icon">📞</span>
+                            <div>
+                                <h4>Teléfono</h4>
+                                <p><a href="tel:+50661237074">+506 6123-7074</a></p>
+                            </div>
+                        </div>
+                        <div class="contact__item">
+                            <span class="contact__icon">✉️</span>
+                            <div>
+                                <h4>Email</h4>
+                                <p><a href="mailto:info@academiajoche.com">info@academiajoche.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact__item">
+                            <span class="contact__icon">🕐</span>
+                            <div>
+                                <h4>Horarios</h4>
+                                <p>Lun - Vie: 9:00 - 21:00<br>Sáb: 9:00 - 14:00</p>
+                            </div>
+                        </div>
+
+                        <!-- Botón de WhatsApp -->
+                        <a href="https://wa.me/50661237074?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20informaci%C3%B3n%20sobre%20las%20clases%20de%20Taekwondo" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="whatsapp-btn">
+                            <svg class="whatsapp-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.128 6.744 3.046 9.378L1.054 31.29l6.118-1.958A15.915 15.915 0 0016.004 32C24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.312 22.594c-.39 1.1-1.932 2.014-3.168 2.282-.846.18-1.95.324-5.67-1.218-4.762-1.97-7.826-6.802-8.064-7.116-.23-.314-1.932-2.574-1.932-4.908s1.222-3.482 1.656-3.96c.434-.478.95-.598 1.266-.598.314 0 .632.004.908.016.292.014.682-.11 1.068.814.39.938 1.34 3.272 1.456 3.51.118.238.198.516.04.83-.158.314-.238.51-.474.786-.238.278-.5.62-.712.832-.238.238-.486.496-.208.972.278.478 1.234 2.036 2.65 3.298 1.82 1.622 3.354 2.126 3.832 2.364.478.238.756.198 1.034-.118.278-.318 1.188-1.382 1.504-1.858.316-.478.632-.396 1.068-.238.434.158 2.77 1.306 3.246 1.544.478.238.796.356.912.554.118.198.118 1.148-.274 2.248z" fill="currentColor"/>
+                            </svg>
+                            <span>Escríbenos por WhatsApp</span>
+                        </a>
+                    </div>
+                    <form class="contact__form" id="contactForm">
+                        <div class="form__group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form__group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form__group">
+                            <label for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--full">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2026 Academia Joche. Todos los derechos reservados.</p>
+                <div class="footer__social">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="js/noticias-firebase.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

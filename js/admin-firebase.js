@@ -325,27 +325,49 @@ const NoticiasAdmin = (() => {
     };
 
     const processImage = (file) => {
-        if (file.size > 5 * 1024 * 1024) {
-            Toast.show('⚠️ Máximo 5MB', 'warning');
-            return;
-        }
+    // Formatos permitidos
+    const formatosPermitidos = ['image/jpeg', 'image/png', 'image/webp'];
+    
+    if (!formatosPermitidos.includes(file.type)) {
+        Toast.show('⚠️ Solo se permiten imágenes JPG, PNG o WEBP', 'warning');
+        return;
+    }
+
+    const MAX_SIZE = 5 * 1024 * 1024; // 5MB
+
+    if (file.size > MAX_SIZE) {
+        const pesoMB = (file.size / (1024 * 1024)).toFixed(2);
+        Toast.show(`⚠️ La imagen pesa ${pesoMB}MB. El máximo permitido es 5MB`, 'warning');
         
-        if (!file.type.startsWith('image/')) {
-            Toast.show('⚠️ Solo imágenes', 'warning');
-            return;
-        }
+        // Mostrar alerta visual en el preview
+        imagePreview.innerHTML = `
+            <div class="preview-error">
+                <span>🚫</span>
+                <p><strong>Imagen demasiado pesada</strong></p>
+                <p>${file.name}</p>
+                <p class="preview-error__size">${pesoMB}MB / 5MB máximo</p>
+                <p class="preview-error__hint">Reduce el tamaño de la imagen e intenta de nuevo</p>
+            </div>
+        `;
+        imagePreview.classList.remove('has-image');
+        removeImageBtn.style.display = 'none';
+        imageInput.value = '';
+        return;
+    }
+    
+    comprimirImagen(file, 800, 0.8).then(compressedFile => {
+        imagenNueva = compressedFile;
+        imagenEliminada = false;
         
-        comprimirImagen(file, 800, 0.8).then(compressedFile => {
-            imagenNueva = compressedFile;
-            imagenEliminada = false;
-            
-            const reader = new FileReader();
-            reader.onload = (e) => showImagePreview(e.target.result);
-            reader.readAsDataURL(compressedFile);
-            
-            Toast.show('✅ Imagen lista', 'success');
-        });
-    };
+        const reader = new FileReader();
+        reader.onload = (e) => showImagePreview(e.target.result);
+        reader.readAsDataURL(compressedFile);
+        
+        const pesoOriginal = (file.size / (1024 * 1024)).toFixed(2);
+        const pesoComprimido = (compressedFile.size / (1024 * 1024)).toFixed(2);
+        Toast.show(`✅ Imagen lista (${pesoOriginal}MB → ${pesoComprimido}MB)`, 'success');
+    });
+};
 
     const comprimirImagen = (file, maxWidth = 800, quality = 0.8) => {
         return new Promise((resolve) => {

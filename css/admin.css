@@ -822,3 +822,46 @@ body {
         gap: 1rem;
     }
 }
+/* ================================
+   PREVIEW ERROR - Imagen muy pesada
+   ================================ */
+.preview-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    text-align: center;
+    color: #dc3545;
+    gap: 0.25rem;
+}
+
+.preview-error span {
+    font-size: 2.5rem;
+}
+
+.preview-error p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.preview-error strong {
+    color: #dc3545;
+    font-size: 1rem;
+}
+
+.preview-error__size {
+    background: #fff3cd;
+    color: #856404 !important;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-top: 0.25rem !important;
+}
+
+.preview-error__hint {
+    font-size: 0.8rem !important;
+    color: #999 !important;
+    margin-top: 0.5rem !important;
+}

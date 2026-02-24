@@ -2,8 +2,12 @@
 <section id="noticias" class="section news">
     <div class="container">
         <h2 class="section__title">Últimas Noticias</h2>
-        <div class="news__grid" id="noticias-container">
-            <!-- Las noticias se cargan automáticamente desde Firebase -->
+        <div class="carousel">
+            <button class="carousel__btn carousel__btn--left" aria-label="Anterior">&#10094;</button>
+            <div class="carousel__track" id="noticias-container">
+                <!-- Las noticias se cargan automáticamente desde Firebase -->
+            </div>
+            <button class="carousel__btn carousel__btn--right" aria-label="Siguiente">&#10095;</button>
         </div>
     </div>
 </section>

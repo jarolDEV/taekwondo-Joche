@@ -41,8 +41,48 @@ const ContactForm = (() => {
     return { init };
 })();
 
+// Carrusel de noticias con loop
+const Carousel = (() => {
+    const init = () => {
+        const track = document.getElementById('noticias-container');
+        const btnLeft = document.querySelector('.carousel__btn--left');
+        const btnRight = document.querySelector('.carousel__btn--right');
+
+        if (!track || !btnLeft || !btnRight) return;
+
+        const getScrollAmount = () => {
+            const card = track.querySelector('.news-card');
+            if (!card) return 300;
+            return card.offsetWidth + 24;
+        };
+
+        btnRight.addEventListener('click', () => {
+            const maxScroll = track.scrollWidth - track.clientWidth;
+
+            if (track.scrollLeft >= maxScroll - 10) {
+                // Si estamos al final, volver al inicio
+                track.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+            }
+        });
+
+        btnLeft.addEventListener('click', () => {
+            if (track.scrollLeft <= 10) {
+                // Si estamos al inicio, ir al final
+                track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' });
+            } else {
+                track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+            }
+        });
+    };
+
+    return { init };
+})();
+
 // Esperar a que las secciones se carguen
 document.addEventListener('sectionsLoaded', () => {
     Navigation.init();
     ContactForm.init();
+    Carousel.init();
 });

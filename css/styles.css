@@ -234,19 +234,92 @@ ul { list-style: none; }
 .about__features li {
     padding: 0.5rem 0;
 }
-
 /* ================================
-   NEWS
+   NEWS + CAROUSEL
    ================================ */
 .news { 
     background: var(--color-light); 
 }
 
-.news__grid {
-    display: grid;
-    gap: 1.5rem;
+/* Contenedor del carrusel */
+.carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
+/* Track: contenedor deslizable */
+.carousel__track {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 1rem 0.5rem;
+
+    /* Ocultar scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.carousel__track::-webkit-scrollbar {
+    display: none;
+}
+
+/* Botones de navegación */
+.carousel__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: var(--color-white);
+    color: var(--color-secondary);
+    border: 2px solid var(--color-primary);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.carousel__btn:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel__btn--left {
+    left: -22px;
+}
+
+.carousel__btn--right {
+    right: -22px;
+}
+
+/* En móvil, botones dentro del contenedor */
+@media (max-width: 767px) {
+    .carousel__btn--left {
+        left: 4px;
+    }
+    .carousel__btn--right {
+        right: 4px;
+    }
+    .carousel__btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+        background: rgba(255,255,255,0.9);
+    }
+}
+
+/* Tarjetas de noticias */
 .news-card {
     background: var(--color-white);
     border-radius: var(--border-radius);
@@ -255,9 +328,26 @@ ul { list-style: none; }
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+
+    /* Ancho responsive */
+    width: 85%;
 }
 
-/* 🔧 Imagen centrada sin recortar */
+@media (min-width: 768px) {
+    .news-card {
+        width: calc(50% - 0.75rem);
+    }
+}
+
+@media (min-width: 1024px) {
+    .news-card {
+        width: calc(33.333% - 1rem);
+    }
+}
+
+/* Imagen centrada sin recortar */
 .news-card__image {
     width: 100%;
     height: 200px;

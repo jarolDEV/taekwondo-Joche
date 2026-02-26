@@ -140,18 +140,20 @@ ul { list-style: none; }
 .nav__menu {
     position: fixed;
     top: 70px;
-    left: -100%;
-    width: 100%;
-    height: calc(100vh - 70px);
+    right: -100%;
+    width: 350px;
+    height: auto;
     background: var(--color-secondary);
     display: flex;
     flex-direction: column;
-    padding-top: 2rem;
-    transition: left var(--transition);
+    padding: 1rem 0;
+    transition: right var(--transition);
+    border-radius: 0 0 0 var(--border-radius);
+    box-shadow: var(--shadow);
 }
 
 .nav__menu.active { 
-    left: 0; 
+    right: 0; 
 }
 
 .nav__link {
@@ -250,7 +252,7 @@ ul { list-style: none; }
 }
 
 /* Track: contenedor deslizable */
-.carousel__track {
+.carousel__track {  
     display: flex;
     gap: 1.5rem;
     overflow-x: auto;

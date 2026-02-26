@@ -80,11 +80,24 @@ const Carousel = (() => {
     return { init };
 })();
 
-// Esperar a que las secciones se carguen
-document.addEventListener('sectionsLoaded', () => {
-    Navigation.init();
-    ContactForm.init();
-});
+// Verificar si las secciones ya se cargaron O esperar el evento
+const inicializarCuandoSeccionesEstenListas = () => {
+    const navegacionExiste = document.querySelector('.nav__toggle');
+    
+    if (navegacionExiste) {
+        // Las secciones ya se cargaron
+        Navigation.init();
+        ContactForm.init();
+    } else {
+        // Esperar a que las secciones se carguen
+        document.addEventListener('sectionsLoaded', () => {
+            Navigation.init();
+            ContactForm.init();
+        });
+    }
+};
+
+inicializarCuandoSeccionesEstenListas();
 
 // Inicializar carrusel cuando las noticias estén listas
 document.addEventListener('noticiasLoaded', () => {

@@ -6,12 +6,13 @@
 import { obtenerNoticiasPublicadas, obtenerNoticia, obtenerFechaPublicacion } from './firebase-config.js';
 
 const NoticiasPublic = (() => {
-    const container = document.getElementById('noticias-container');
-
-    const init = async () => {
-        if (!container) return;
+    
+    const inicializar = async () => {
+        const contenedorNoticias = document.getElementById('noticias-container');
         
-        container.innerHTML = `
+        if (!contenedorNoticias) return;
+        
+        contenedorNoticias.innerHTML = `
             <div class="loading-state">
                 <div class="spinner"></div>
                 <p>Cargando noticias...</p>
@@ -19,35 +20,38 @@ const NoticiasPublic = (() => {
         `;
 
         try {
-            const noticias = await obtenerNoticiasPublicadas(6);
+            const listaNoticias = await obtenerNoticiasPublicadas(6);
             
-            if (noticias.length === 0) {
-                mostrarVacio();
+            if (listaNoticias.length === 0) {
+                mostrarEstadoVacio(contenedorNoticias);
                 return;
             }
 
-            renderNoticias(noticias);
+            renderizarNoticias(contenedorNoticias, listaNoticias);
+            
+            // Disparar evento cuando las noticias estén listas
+            document.dispatchEvent(new Event('noticiasLoaded'));
         } catch (error) {
             console.error('Error:', error);
-            mostrarError();
+            mostrarEstadoError(contenedorNoticias);
         }
     };
 
-    const renderNoticias = (noticias) => {
-        container.innerHTML = noticias.map(noticia => {
-            const fechaPub = obtenerFechaPublicacion(noticia);
+    const renderizarNoticias = (contenedorNoticias, listaNoticias) => {
+        contenedorNoticias.innerHTML = listaNoticias.map(noticia => {
+            const fechaPublicacion = obtenerFechaPublicacion(noticia);
             
             return `
                 <article class="news-card">
                     ${noticia.imagen ? `
                         <div class="news-card__image">
-                            <img src="${noticia.imagen}" alt="${escapeHtml(noticia.titulo)}" loading="lazy">
+                            <img src="${noticia.imagen}" alt="${escaparHtml(noticia.titulo)}" loading="lazy">
                         </div>
                     ` : ''}
                     <div class="news-card__body">
-                        <span class="news-card__date">${formatearFecha(fechaPub)}</span>
-                        <h3 class="news-card__title">${escapeHtml(noticia.titulo)}</h3>
-                        <p class="news-card__excerpt">${escapeHtml(noticia.resumen)}</p>
+                        <span class="news-card__date">${formatearFecha(fechaPublicacion)}</span>
+                        <h3 class="news-card__title">${escaparHtml(noticia.titulo)}</h3>
+                        <p class="news-card__excerpt">${escaparHtml(noticia.resumen)}</p>
                         <button class="news-card__link" data-id="${noticia.id}">
                             Leer más →
                         </button>
@@ -56,71 +60,71 @@ const NoticiasPublic = (() => {
             `;
         }).join('');
 
-        container.querySelectorAll('.news-card__link').forEach(btn => {
-            btn.addEventListener('click', () => verDetalle(btn.dataset.id));
+        contenedorNoticias.querySelectorAll('.news-card__link').forEach(boton => {
+            boton.addEventListener('click', () => verDetalleNoticia(boton.dataset.id));
         });
     };
 
-    const verDetalle = async (id) => {
+    const verDetalleNoticia = async (noticiaId) => {
         try {
-            const noticia = await obtenerNoticia(id);
-            if (noticia) mostrarModal(noticia);
+            const noticia = await obtenerNoticia(noticiaId);
+            if (noticia) mostrarModalNoticia(noticia);
         } catch (error) {
             console.error('Error:', error);
         }
     };
 
-    const mostrarModal = (noticia) => {
-        const existing = document.querySelector('.modal');
-        if (existing) existing.remove();
+    const mostrarModalNoticia = (noticia) => {
+        const modalExistente = document.querySelector('.modal');
+        if (modalExistente) modalExistente.remove();
 
-        const fechaPub = obtenerFechaPublicacion(noticia);
+        const fechaPublicacion = obtenerFechaPublicacion(noticia);
 
-        const modal = document.createElement('div');
-        modal.className = 'modal';
-        modal.innerHTML = `
+        const modalNoticia = document.createElement('div');
+        modalNoticia.className = 'modal';
+        modalNoticia.innerHTML = `
             <div class="modal__overlay"></div>
             <div class="modal__content">
                 <button class="modal__close" aria-label="Cerrar">✕</button>
                 ${noticia.imagen ? `
                     <div class="modal__image">
-                        <img src="${noticia.imagen}" alt="${escapeHtml(noticia.titulo)}">
+                        <img src="${noticia.imagen}" alt="${escaparHtml(noticia.titulo)}">
                     </div>
                 ` : ''}
-                <span class="modal__date">${formatearFecha(fechaPub)}</span>
-                <h2 class="modal__title">${escapeHtml(noticia.titulo)}</h2>
-                <div class="modal__text">${escapeHtml(noticia.contenido)}</div>
+                <span class="modal__date">${formatearFecha(fechaPublicacion)}</span>
+                <h2 class="modal__title">${escaparHtml(noticia.titulo)}</h2>
+                <div class="modal__text">${escaparHtml(noticia.contenido)}</div>
             </div>
         `;
 
-        document.body.appendChild(modal);
+        document.body.appendChild(modalNoticia);
         document.body.style.overflow = 'hidden';
 
-        requestAnimationFrame(() => modal.classList.add('active'));
+        requestAnimationFrame(() => modalNoticia.classList.add('active'));
 
-        modal.querySelector('.modal__overlay').addEventListener('click', cerrarModal);
-        modal.querySelector('.modal__close').addEventListener('click', cerrarModal);
-        document.addEventListener('keydown', handleEsc);
+        modalNoticia.querySelector('.modal__overlay').addEventListener('click', cerrarModalNoticia);
+        modalNoticia.querySelector('.modal__close').addEventListener('click', cerrarModalNoticia);
+        document.addEventListener('keydown', manejarTeclaEscape);
     };
 
-    const cerrarModal = () => {
-        const modal = document.querySelector('.modal');
-        if (modal) {
-            modal.classList.remove('active');
-            document.removeEventListener('keydown', handleEsc);
+    const cerrarModalNoticia = () => {
+        const modalNoticia = document.querySelector('.modal');
+        if (modalNoticia) {
+            modalNoticia.classList.remove('active');
+            document.removeEventListener('keydown', manejarTeclaEscape);
             setTimeout(() => {
-                modal.remove();
+                modalNoticia.remove();
                 document.body.style.overflow = '';
             }, 300);
         }
     };
 
-    const handleEsc = (e) => {
-        if (e.key === 'Escape') cerrarModal();
+    const manejarTeclaEscape = (evento) => {
+        if (evento.key === 'Escape') cerrarModalNoticia();
     };
 
-    const mostrarVacio = () => {
-        container.innerHTML = `
+    const mostrarEstadoVacio = (contenedorNoticias) => {
+        contenedorNoticias.innerHTML = `
             <div class="empty-state">
                 <span>📰</span>
                 <p>Próximamente publicaremos noticias. ¡Vuelve pronto!</p>
@@ -128,8 +132,8 @@ const NoticiasPublic = (() => {
         `;
     };
 
-    const mostrarError = () => {
-        container.innerHTML = `
+    const mostrarEstadoError = (contenedorNoticias) => {
+        contenedorNoticias.innerHTML = `
             <div class="error-state">
                 <span>⚠️</span>
                 <p>No pudimos cargar las noticias.</p>
@@ -146,15 +150,29 @@ const NoticiasPublic = (() => {
         });
     };
 
-    const escapeHtml = (text) => {
-        const div = document.createElement('div');
-        div.textContent = text || '';
-        return div.innerHTML;
+    const escaparHtml = (texto) => {
+        const elementoTemporal = document.createElement('div');
+        elementoTemporal.textContent = texto || '';
+        return elementoTemporal.innerHTML;
     };
 
-    return { init };
+    return { inicializar };
 })();
 
-document.addEventListener('DOMContentLoaded', () => {
-    NoticiasPublic.init();
-});
+// Verificar si las secciones ya se cargaron O esperar el evento
+const inicializarCuandoSeccionesEstenListas = () => {
+    const contenedorNoticiasExiste = document.getElementById('noticias-container');
+    
+    if (contenedorNoticiasExiste) {
+        // Las secciones ya se cargaron, inicializar inmediatamente
+        NoticiasPublic.inicializar();
+    } else {
+        // Esperar a que las secciones se carguen
+        document.addEventListener('sectionsLoaded', () => {
+            NoticiasPublic.inicializar();
+        });
+    }
+};
+
+// Ejecutar cuando el módulo esté listo
+inicializarCuandoSeccionesEstenListas();

@@ -84,5 +84,9 @@ const Carousel = (() => {
 document.addEventListener('sectionsLoaded', () => {
     Navigation.init();
     ContactForm.init();
+});
+
+// Inicializar carrusel cuando las noticias estén listas
+document.addEventListener('noticiasLoaded', () => {
     Carousel.init();
 });

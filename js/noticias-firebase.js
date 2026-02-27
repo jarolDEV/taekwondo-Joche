@@ -1,6 +1,5 @@
 /**
  * Módulo de Noticias Públicas - Firebase
- * Compatible con formato antiguo y nuevo
  */
 
 import { obtenerNoticiasPublicadas, obtenerNoticia, obtenerFechaPublicacion } from './firebase-config.js';

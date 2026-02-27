@@ -1,5 +1,5 @@
 /**
- * Configuración de Cloudinary - Academia Joche
+ * Configuración de Cloudinary
  * Manejo de subida de imágenes
  */
 

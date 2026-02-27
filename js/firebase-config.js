@@ -1,5 +1,5 @@
 /**
- * Configuración de Firebase - Academia Joche
+ * Configuración de Firebase, funciones de autenticación y manejo de noticias
  * Compatible con noticias antiguas (fecha) y nuevas (fechaPublicacion)
  */
 
@@ -30,7 +30,7 @@ import {
     reauthenticateWithCredential
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-// Tu configuración de Firebase
+// Configuración de Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyBRYhcDKMt-u31qrc7UIYuWdwXHJgtiGIo",
     authDomain: "academia-joche.firebaseapp.com",

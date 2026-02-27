@@ -1,5 +1,5 @@
 /**
- * Main JavaScript - Academia Joche
+ * Main JavaScript
  */
 
 // Navegación móvil
@@ -41,7 +41,7 @@ const ContactForm = (() => {
     return { init };
 })();
 
-// Carrusel de noticias con loop
+// Carrusel de noticias
 const Carousel = (() => {
     const init = () => {
         const track = document.getElementById('noticias-container');

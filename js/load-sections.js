@@ -1,6 +1,5 @@
 /**
- * Cargador de secciones HTML - Academia Joche
- * Carga cada sección de forma modular
+ * Cargador de secciones HTML
  */
 
 const SectionLoader = (() => {
